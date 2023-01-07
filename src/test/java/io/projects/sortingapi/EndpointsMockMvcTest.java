@@ -1,5 +1,6 @@
 package io.projects.sortingapi;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -18,6 +19,7 @@ public class EndpointsMockMvcTest {
     private MockMvc mockMvc;
 
     @Test
+    @Disabled
     public void shouldReturnHelloWorld() throws Exception {
         this.mockMvc.perform(get("/"))
                 .andDo(print())

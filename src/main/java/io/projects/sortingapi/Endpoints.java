@@ -1,13 +1,18 @@
 package io.projects.sortingapi;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import io.projects.sortingapi.sorting.Sorter;
+import io.projects.sortingapi.sorting.SorterFactory;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class Endpoints {
-    @GetMapping("/")
-    public @ResponseBody String hello() {
-        return "Hello World";
+    @PostMapping("/sort")
+    public @ResponseBody List<Integer> sort(@RequestParam String algorithm,
+                                            @RequestBody List<Integer> list) throws Exception {
+        Sorter sorter = new SorterFactory().getSorter(algorithm);
+        sorter.sort(list);
+        return list;
     }
 }
