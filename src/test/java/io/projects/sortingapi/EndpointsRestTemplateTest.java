@@ -13,6 +13,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,11 +30,18 @@ public class EndpointsRestTemplateTest {
     private TestRestTemplate restTemplate;
 
     @Test
-    public void insertionSortReturnsSortedList() throws Exception {
-        List<Integer> list = Stream.of(1, 2, 5, 4, 3).collect(Collectors.toList());
+    public void testInsertionSortResponse() throws Exception {
         String url = "http://localhost:" + port + "/sort?algorithm=insertion";
-        HttpEntity<List<Integer>> request = new HttpEntity<>(list);
-        ResponseEntity<List> result = this.restTemplate.postForEntity(url, request, List.class);
-        Assertions.assertEquals(list.stream().sorted().toList(), result.getBody());
+        List<Integer> requestBody = Stream.of(1, 2, 5, 4, 3).collect(Collectors.toList());
+
+        List<List<Integer>> expectedResponseBody = new ArrayList<>();
+        expectedResponseBody.add(new ArrayList<>(List.of(1, 2, 5, 4, 3)));
+        expectedResponseBody.add(new ArrayList<>(List.of(1, 2, 4, 5, 3)));
+        expectedResponseBody.add(new ArrayList<>(List.of(1, 2, 4, 3, 5)));
+        expectedResponseBody.add(new ArrayList<>(List.of(1, 2, 3, 4, 5)));
+
+        ResponseEntity<List> actualResponse = this.restTemplate.postForEntity(url,
+                new HttpEntity<>(requestBody), List.class);
+        Assertions.assertEquals(expectedResponseBody, actualResponse.getBody());
     }
 }
