@@ -10,6 +10,7 @@ import java.util.List;
 @RestController
 public class Endpoints {
     @PostMapping("/sort")
+    @CrossOrigin()
     public @ResponseBody List<List<Integer>> sort(@RequestParam String algorithm,
                                             @RequestBody List<Integer> list) throws Exception {
         List<List<Integer>> frames = new ArrayList<>();
