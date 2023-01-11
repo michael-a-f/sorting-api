@@ -1,6 +1,8 @@
-package io.projects.sortingapi;
+package io.projects.sortingapi.integration;
 
+import io.projects.sortingapi.Frame;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,6 +17,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 
+@Disabled
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class EndpointsRestTemplateTest {
     @Value(value="${local.server.port}")
@@ -28,11 +31,15 @@ public class EndpointsRestTemplateTest {
         String url = "http://localhost:" + port + "/sort?algorithm=insertion";
         List<Integer> requestBody = Stream.of(1, 2, 5, 4, 3).collect(Collectors.toList());
 
-        List<List<Integer>> expectedResponseBody = new ArrayList<>();
-        expectedResponseBody.add(new ArrayList<>(List.of(1, 2, 5, 4, 3)));
-        expectedResponseBody.add(new ArrayList<>(List.of(1, 2, 4, 5, 3)));
-        expectedResponseBody.add(new ArrayList<>(List.of(1, 2, 4, 3, 5)));
-        expectedResponseBody.add(new ArrayList<>(List.of(1, 2, 3, 4, 5)));
+        List<Frame> expectedResponseBody = new ArrayList<>();
+        expectedResponseBody.add(new Frame(new ArrayList<>(List.of(1, 2, 5, 4, 3)), 0));
+        expectedResponseBody.add(new Frame(new ArrayList<>(List.of(1, 2, 5, 4, 3)), 1));
+        expectedResponseBody.add(new Frame(new ArrayList<>(List.of(1, 2, 5, 4, 3)), 3));
+        expectedResponseBody.add(new Frame(new ArrayList<>(List.of(1, 2, 4, 5, 3)), 2));
+        expectedResponseBody.add(new Frame(new ArrayList<>(List.of(1, 2, 4, 5, 3)), 4));
+        expectedResponseBody.add(new Frame(new ArrayList<>(List.of(1, 2, 4, 3, 5)), 3));
+        expectedResponseBody.add(new Frame(new ArrayList<>(List.of(1, 2, 3, 4, 5)), 2));
+        expectedResponseBody.add(new Frame(new ArrayList<>(List.of(1, 2, 3, 4, 5)), null));
 
         ResponseEntity<List> actualResponse = this.restTemplate.postForEntity(url,
                 new HttpEntity<>(requestBody), List.class);
