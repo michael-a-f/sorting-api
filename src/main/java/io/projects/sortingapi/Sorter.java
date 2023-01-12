@@ -4,5 +4,7 @@ package io.projects.sortingapi;
 import java.util.List;
 
 public interface Sorter {
-    public void generateSortFrames(List<Integer> list, List<Frame> frames);
+    public Sorter setList(List<Integer> list);
+    public Sorter setFrames(List<Frame> frames);
+    public List<Frame> generateSortFrames();
 }

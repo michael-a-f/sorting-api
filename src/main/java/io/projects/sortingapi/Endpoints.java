@@ -11,9 +11,9 @@ public class Endpoints {
     @CrossOrigin()
     public @ResponseBody List<Frame> sort(@RequestParam String algorithm,
                                           @RequestBody List<Integer> list) throws Exception {
-        List<Frame> frames = new ArrayList<>();
-        Sorter sorter = new SorterFactory().getSorter(algorithm);
-        sorter.generateSortFrames(list, frames);
-        return frames;
+        return new SorterFactory().getSorter(algorithm)
+                .setList(list)
+                .setFrames(new ArrayList<>())
+                .generateSortFrames();
     }
 }

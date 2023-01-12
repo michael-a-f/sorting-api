@@ -8,11 +8,22 @@ import java.util.Collections;
 import java.util.List;
 
 public class InsertionSorter implements Sorter {
+    public List<Integer> list;
+    public List<Frame> frames;
 
-    public void generateSortFrames(List<Integer> list, List<Frame> frames) {
+    public InsertionSorter setList(List<Integer> list) {
+        this.list = list;
+        return this;
+    }
+
+    public InsertionSorter setFrames(List<Frame> frames) {
+        this.frames = frames;
+        return this;
+    }
+    public List<Frame> generateSortFrames() {
         int n = list.size();
         if (n == 0) {
-            return;
+            return frames;
         }
         frames.add(new Frame(new ArrayList<>(list), 0));
         for (int currIdx = 1; currIdx < n; currIdx++) {
@@ -27,5 +38,6 @@ public class InsertionSorter implements Sorter {
             }
         }
         frames.add(new Frame(new ArrayList<>(list), null));
+        return frames;
     }
 }
