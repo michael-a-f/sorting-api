@@ -7,19 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class BubbleSorter implements Sorter {
-    public List<Integer> list;
-    public List<Frame> frames;
-
-    public BubbleSorter setList(List<Integer> list) {
-        this.list = list;
-        return this;
-    }
-
-    public BubbleSorter setFrames(List<Frame> frames) {
-        this.frames = frames;
-        return this;
-    }
+public class BubbleSorter extends Sorter {
 
     public List<Frame> generateSortFrames() {
         if (list.size() == 0) {

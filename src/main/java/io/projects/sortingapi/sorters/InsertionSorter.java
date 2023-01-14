@@ -7,19 +7,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class InsertionSorter implements Sorter {
-    public List<Integer> list;
-    public List<Frame> frames;
+public class InsertionSorter extends Sorter {
 
-    public InsertionSorter setList(List<Integer> list) {
-        this.list = list;
-        return this;
-    }
-
-    public InsertionSorter setFrames(List<Frame> frames) {
-        this.frames = frames;
-        return this;
-    }
     public List<Frame> generateSortFrames() {
         int n = list.size();
         if (n == 0) {
