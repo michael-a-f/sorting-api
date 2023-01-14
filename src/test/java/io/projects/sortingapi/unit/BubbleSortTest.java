@@ -11,21 +11,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static io.projects.sortingapi.TestUtils.assertFramesMatch;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 public class BubbleSortTest {
-    void assertFramesMatch(List<Frame> expected, List<Frame> actual) {
-        for (int i = 0; i < actual.size(); i++) {
-            List<Integer> actualList = actual.get(i).list;
-            Integer actualCurrent = actual.get(i).current;
-            List<Integer> expectedList = expected.get(i).list;
-            Integer expectedCurrent = expected.get(i).current;
-
-            assertEquals(expectedList, actualList, "List in Frame " + i + " does not match expected");
-            assertEquals(expectedCurrent, actualCurrent, "Current index in Frame " + i + " does not match expected");
-        }
-    }
 
     @Test
     void alreadySorted() {
