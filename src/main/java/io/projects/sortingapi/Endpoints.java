@@ -1,8 +1,6 @@
 package io.projects.sortingapi;
 
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -11,9 +9,6 @@ public class Endpoints {
     @CrossOrigin()
     public @ResponseBody List<Frame> sort(@RequestParam String algorithm,
                                           @RequestBody List<Integer> list) throws Exception {
-        return new SorterFactory().getSorter(algorithm)
-                .setList(list)
-                .setFrames(new ArrayList<>())
-                .generateSortFrames();
+        return new SorterFactory().getSorter(algorithm).setList(list).generateSortFrames();
     }
 }
