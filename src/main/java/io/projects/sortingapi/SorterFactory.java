@@ -16,6 +16,6 @@ public class SorterFactory {
         } else if (algorithm.equalsIgnoreCase("quick")) {
             return new QuickSorter();
         }
-        throw new Exception("This algorithm is not supported!");
+        throw new IllegalArgumentException(algorithm + " is not a supported algorithm!");
     }
 }
