@@ -1,8 +1,13 @@
+name: AWS Deployment
+
 on:
-  push:
+  workflow_run:
+    workflows: ["Java CI with Maven"]
     branches:
       - main
       - "feature/*"
+    types:
+      - completed
 
 jobs:
   deploy-lambda:
