@@ -27,7 +27,6 @@ jobs:
     name: Deploy to AWS
     runs-on: ubuntu-latest
     steps:
-      - name: Export AWS Credentials
       - name: Run Terraform
         uses: hashicorp/setup-terraform@v2
         env:
