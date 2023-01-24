@@ -39,3 +39,6 @@ mvnw.cmd
 
 ### AWS ###
 .aws-sam
+
+### TERRAFORM ###
+.terraform*
