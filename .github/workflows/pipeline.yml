@@ -24,7 +24,7 @@ jobs:
         run: mvn -B clean test
   build-jar:
     needs: compile-and-test
-    name: Build the jar
+    name: Build JAR
     runs-on: ubuntu-latest
     steps:
       - name: Clone the repo
@@ -37,9 +37,14 @@ jobs:
           cache: maven
       - name: Run Maven command
         run: mvn -B -DskipTests clean package
-  terraform-plan:
+      - name: Save JAR as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: lambda-jar-file
+          path: target/sorting-api-0.0.1-SNAPSHOT.jar
+  terraform-plan-and-apply:
     needs: build-jar
-    name: Terraform Plan
+    name: Terraform Plan and Apply
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the repo
@@ -54,18 +59,9 @@ jobs:
         run: |
           terraform init
           terraform plan
-  terraform-apply:
-    needs: terraform-plan
-    name: Terraform Apply
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout the repo
-        uses: actions/checkout@v3
-      - name: Install Terraform
-        uses: hashicorp/setup-terraform@v2
       - name: Run Terraform apply
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
-        run: terraform show
+        run: terraform show # use this as placeholder
