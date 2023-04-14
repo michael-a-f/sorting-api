@@ -1,9 +1,6 @@
-package io.projects.sortingapi;
+package io.projects.sortingapi.sorting;
 
-import io.projects.sortingapi.sorters.BubbleSorter;
-import io.projects.sortingapi.sorters.InsertionSorter;
-import io.projects.sortingapi.sorters.MergeSorter;
-import io.projects.sortingapi.sorters.QuickSorter;
+import io.projects.sortingapi.sorting.sorters.*;
 
 public class SorterFactory {
     public Sorter getSorter(String algorithm) throws Exception {

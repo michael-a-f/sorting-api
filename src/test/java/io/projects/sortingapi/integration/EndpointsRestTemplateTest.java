@@ -1,6 +1,6 @@
 package io.projects.sortingapi.integration;
 
-import io.projects.sortingapi.Frame;
+import io.projects.sortingapi.sorting.SortFrame;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -31,15 +31,15 @@ public class EndpointsRestTemplateTest {
         String url = "http://localhost:" + port + "/sort?algorithm=insertion";
         List<Integer> requestBody = Stream.of(1, 2, 5, 4, 3).collect(Collectors.toList());
 
-        List<Frame> expectedResponseBody = new ArrayList<>();
-        expectedResponseBody.add(new Frame(new ArrayList<>(List.of(1, 2, 5, 4, 3)), 0));
-        expectedResponseBody.add(new Frame(new ArrayList<>(List.of(1, 2, 5, 4, 3)), 1));
-        expectedResponseBody.add(new Frame(new ArrayList<>(List.of(1, 2, 5, 4, 3)), 3));
-        expectedResponseBody.add(new Frame(new ArrayList<>(List.of(1, 2, 4, 5, 3)), 2));
-        expectedResponseBody.add(new Frame(new ArrayList<>(List.of(1, 2, 4, 5, 3)), 4));
-        expectedResponseBody.add(new Frame(new ArrayList<>(List.of(1, 2, 4, 3, 5)), 3));
-        expectedResponseBody.add(new Frame(new ArrayList<>(List.of(1, 2, 3, 4, 5)), 2));
-        expectedResponseBody.add(new Frame(new ArrayList<>(List.of(1, 2, 3, 4, 5)), null));
+        List<SortFrame> expectedResponseBody = new ArrayList<>();
+        expectedResponseBody.add(new SortFrame(new ArrayList<>(List.of(1, 2, 5, 4, 3)), 0));
+        expectedResponseBody.add(new SortFrame(new ArrayList<>(List.of(1, 2, 5, 4, 3)), 1));
+        expectedResponseBody.add(new SortFrame(new ArrayList<>(List.of(1, 2, 5, 4, 3)), 3));
+        expectedResponseBody.add(new SortFrame(new ArrayList<>(List.of(1, 2, 4, 5, 3)), 2));
+        expectedResponseBody.add(new SortFrame(new ArrayList<>(List.of(1, 2, 4, 5, 3)), 4));
+        expectedResponseBody.add(new SortFrame(new ArrayList<>(List.of(1, 2, 4, 3, 5)), 3));
+        expectedResponseBody.add(new SortFrame(new ArrayList<>(List.of(1, 2, 3, 4, 5)), 2));
+        expectedResponseBody.add(new SortFrame(new ArrayList<>(List.of(1, 2, 3, 4, 5)), null));
 
         ResponseEntity<List> actualResponse = this.restTemplate.postForEntity(url,
                 new HttpEntity<>(requestBody), List.class);

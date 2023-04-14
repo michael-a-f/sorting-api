@@ -1,7 +1,7 @@
 package io.projects.sortingapi.unit;
 
-import io.projects.sortingapi.Frame;
-import io.projects.sortingapi.sorters.InsertionSorter;
+import io.projects.sortingapi.sorting.SortFrame;
+import io.projects.sortingapi.sorting.sorters.InsertionSorter;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,15 +20,15 @@ public class InsertionSortTest {
     @Test
     void alreadySorted() {
         List<Integer> list = Stream.of(1, 2, 3, 4, 5).collect(Collectors.toList());
-        List<Frame> actual = new InsertionSorter().setList(list).setFrames(new ArrayList<>()).generateSortFrames();
+        List<SortFrame> actual = new InsertionSorter().setList(list).generateSortFrames();
 
-        List<Frame> expected = new ArrayList<>();
-        expected.add(new Frame(new ArrayList<>(List.of(1, 2, 3, 4, 5)), 0));
-        expected.add(new Frame(new ArrayList<>(List.of(1, 2, 3, 4, 5)), 1));
-        expected.add(new Frame(new ArrayList<>(List.of(1, 2, 3, 4, 5)), 2));
-        expected.add(new Frame(new ArrayList<>(List.of(1, 2, 3, 4, 5)), 3));
-        expected.add(new Frame(new ArrayList<>(List.of(1, 2, 3, 4, 5)), 4));
-        expected.add(new Frame(new ArrayList<>(List.of(1, 2, 3, 4, 5)), null));
+        List<SortFrame> expected = new ArrayList<>();
+        expected.add(new SortFrame(new ArrayList<>(List.of(1, 2, 3, 4, 5)), 0));
+        expected.add(new SortFrame(new ArrayList<>(List.of(1, 2, 3, 4, 5)), 1));
+        expected.add(new SortFrame(new ArrayList<>(List.of(1, 2, 3, 4, 5)), 2));
+        expected.add(new SortFrame(new ArrayList<>(List.of(1, 2, 3, 4, 5)), 3));
+        expected.add(new SortFrame(new ArrayList<>(List.of(1, 2, 3, 4, 5)), 4));
+        expected.add(new SortFrame(new ArrayList<>(List.of(1, 2, 3, 4, 5)), null));
 
         assertFramesMatch(expected, actual);
     }
@@ -36,25 +36,25 @@ public class InsertionSortTest {
     @Test
     void reverseSorted() {
         List<Integer> list = Stream.of(5, 4, 3, 2, 1).collect(Collectors.toList());
-        List<Frame> actual = new InsertionSorter().setList(list).setFrames(new ArrayList<>()).generateSortFrames();
+        List<SortFrame> actual = new InsertionSorter().setList(list).generateSortFrames();
 
-        List<Frame> expected = new ArrayList<>();
-        expected.add(new Frame(new ArrayList<>(List.of(5, 4, 3, 2, 1)), 0));
-        expected.add(new Frame(new ArrayList<>(List.of(5, 4, 3, 2, 1)), 1));
-        expected.add(new Frame(new ArrayList<>(List.of(4, 5, 3, 2, 1)), 0));
-        expected.add(new Frame(new ArrayList<>(List.of(4, 5, 3, 2, 1)), 2));
-        expected.add(new Frame(new ArrayList<>(List.of(4, 3, 5, 2, 1)), 1));
-        expected.add(new Frame(new ArrayList<>(List.of(3, 4, 5, 2, 1)), 0));
-        expected.add(new Frame(new ArrayList<>(List.of(3, 4, 5, 2, 1)), 3));
-        expected.add(new Frame(new ArrayList<>(List.of(3, 4, 2, 5, 1)), 2));
-        expected.add(new Frame(new ArrayList<>(List.of(3, 2, 4, 5, 1)), 1));
-        expected.add(new Frame(new ArrayList<>(List.of(2, 3, 4, 5, 1)), 0));
-        expected.add(new Frame(new ArrayList<>(List.of(2, 3, 4, 5, 1)), 4));
-        expected.add(new Frame(new ArrayList<>(List.of(2, 3, 4, 1, 5)), 3));
-        expected.add(new Frame(new ArrayList<>(List.of(2, 3, 1, 4, 5)), 2));
-        expected.add(new Frame(new ArrayList<>(List.of(2, 1, 3, 4, 5)), 1));
-        expected.add(new Frame(new ArrayList<>(List.of(1, 2, 3, 4, 5)), 0));
-        expected.add(new Frame(new ArrayList<>(List.of(1, 2, 3, 4, 5)), null));
+        List<SortFrame> expected = new ArrayList<>();
+        expected.add(new SortFrame(new ArrayList<>(List.of(5, 4, 3, 2, 1)), 0));
+        expected.add(new SortFrame(new ArrayList<>(List.of(5, 4, 3, 2, 1)), 1));
+        expected.add(new SortFrame(new ArrayList<>(List.of(4, 5, 3, 2, 1)), 0));
+        expected.add(new SortFrame(new ArrayList<>(List.of(4, 5, 3, 2, 1)), 2));
+        expected.add(new SortFrame(new ArrayList<>(List.of(4, 3, 5, 2, 1)), 1));
+        expected.add(new SortFrame(new ArrayList<>(List.of(3, 4, 5, 2, 1)), 0));
+        expected.add(new SortFrame(new ArrayList<>(List.of(3, 4, 5, 2, 1)), 3));
+        expected.add(new SortFrame(new ArrayList<>(List.of(3, 4, 2, 5, 1)), 2));
+        expected.add(new SortFrame(new ArrayList<>(List.of(3, 2, 4, 5, 1)), 1));
+        expected.add(new SortFrame(new ArrayList<>(List.of(2, 3, 4, 5, 1)), 0));
+        expected.add(new SortFrame(new ArrayList<>(List.of(2, 3, 4, 5, 1)), 4));
+        expected.add(new SortFrame(new ArrayList<>(List.of(2, 3, 4, 1, 5)), 3));
+        expected.add(new SortFrame(new ArrayList<>(List.of(2, 3, 1, 4, 5)), 2));
+        expected.add(new SortFrame(new ArrayList<>(List.of(2, 1, 3, 4, 5)), 1));
+        expected.add(new SortFrame(new ArrayList<>(List.of(1, 2, 3, 4, 5)), 0));
+        expected.add(new SortFrame(new ArrayList<>(List.of(1, 2, 3, 4, 5)), null));
 
         assertFramesMatch(expected, actual);
     }
@@ -62,17 +62,17 @@ public class InsertionSortTest {
     @Test
     void allSameValue() {
         List<Integer> list = Stream.of(1, 1, 1, 1, 1, 1, 1).collect(Collectors.toList());
-        List<Frame> actual = new InsertionSorter().setList(list).setFrames(new ArrayList<>()).generateSortFrames();
+        List<SortFrame> actual = new InsertionSorter().setList(list).generateSortFrames();
 
-        List<Frame> expected = new ArrayList<>();
-        expected.add(new Frame(new ArrayList<>(List.of(1, 1, 1, 1, 1, 1, 1)), 0));
-        expected.add(new Frame(new ArrayList<>(List.of(1, 1, 1, 1, 1, 1, 1)), 1));
-        expected.add(new Frame(new ArrayList<>(List.of(1, 1, 1, 1, 1, 1, 1)), 2));
-        expected.add(new Frame(new ArrayList<>(List.of(1, 1, 1, 1, 1, 1, 1)), 3));
-        expected.add(new Frame(new ArrayList<>(List.of(1, 1, 1, 1, 1, 1, 1)), 4));
-        expected.add(new Frame(new ArrayList<>(List.of(1, 1, 1, 1, 1, 1, 1)), 5));
-        expected.add(new Frame(new ArrayList<>(List.of(1, 1, 1, 1, 1, 1, 1)), 6));
-        expected.add(new Frame(new ArrayList<>(List.of(1, 1, 1, 1, 1, 1, 1)), null));
+        List<SortFrame> expected = new ArrayList<>();
+        expected.add(new SortFrame(new ArrayList<>(List.of(1, 1, 1, 1, 1, 1, 1)), 0));
+        expected.add(new SortFrame(new ArrayList<>(List.of(1, 1, 1, 1, 1, 1, 1)), 1));
+        expected.add(new SortFrame(new ArrayList<>(List.of(1, 1, 1, 1, 1, 1, 1)), 2));
+        expected.add(new SortFrame(new ArrayList<>(List.of(1, 1, 1, 1, 1, 1, 1)), 3));
+        expected.add(new SortFrame(new ArrayList<>(List.of(1, 1, 1, 1, 1, 1, 1)), 4));
+        expected.add(new SortFrame(new ArrayList<>(List.of(1, 1, 1, 1, 1, 1, 1)), 5));
+        expected.add(new SortFrame(new ArrayList<>(List.of(1, 1, 1, 1, 1, 1, 1)), 6));
+        expected.add(new SortFrame(new ArrayList<>(List.of(1, 1, 1, 1, 1, 1, 1)), null));
 
         assertFramesMatch(expected, actual);
     }
@@ -80,9 +80,9 @@ public class InsertionSortTest {
     @Test
     void emptyList() {
         List<Integer> list = new ArrayList<>();
-        List<Frame> actual = new InsertionSorter().setList(list).setFrames(new ArrayList<>()).generateSortFrames();
+        List<SortFrame> actual = new InsertionSorter().setList(list).generateSortFrames();
 
-        List<Frame> expected = new ArrayList<>();
+        List<SortFrame> expected = new ArrayList<>();
 
         assertEquals(expected, actual);
     }
@@ -96,13 +96,13 @@ public class InsertionSortTest {
         list.add(2);
         list.add(1);
         list.add(null);
-        List<Frame> actual = new InsertionSorter().setList(list).setFrames(new ArrayList<>()).generateSortFrames();
+        List<SortFrame> actual = new InsertionSorter().setList(list).generateSortFrames();
     }
 
     @Disabled
     @Test
     void nullList() {
         List<Integer> list = null;
-        List<Frame> actual = new InsertionSorter().setList(list).setFrames(new ArrayList<>()).generateSortFrames();
+        List<SortFrame> actual = new InsertionSorter().setList(list).generateSortFrames();
     }
 }
