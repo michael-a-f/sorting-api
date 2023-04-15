@@ -21,9 +21,7 @@ public class Application {
 	@CrossOrigin()
 	public @ResponseBody List<SortFrame> sort(@RequestParam String algorithm,
 											  @RequestBody List<Integer> list) throws Exception {
-		return new SorterFactory().getSorter(algorithm)
-				.setList(list)
-				.generateSortFrames();
+		return new SorterFactory().getSorter(algorithm).generateSortFrames(list);
 	}
 
 

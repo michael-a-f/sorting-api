@@ -4,9 +4,8 @@ import io.projects.sortingapi.sorting.SortFrame;
 
 import java.util.List;
 
-public class QuickSorter extends Sorter {
+public class QuickSorter implements Sorter {
 
-    public List<SortFrame> generateSortFrames() {
-        return this.frames;
-    }
-}
+    public List<SortFrame> generateSortFrames(List<Integer> list) {
+        return null;
+    }}
