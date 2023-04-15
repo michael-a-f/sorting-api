@@ -6,9 +6,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class InsertionSorter extends Sorter {
+public class InsertionSorter implements Sorter {
 
-    public List<SortFrame> generateSortFrames() {
+    public List<SortFrame> generateSortFrames(List<Integer> list) {
+        List<SortFrame> frames = new ArrayList<>();
         int n = list.size();
         if (n == 0) {
             return frames;

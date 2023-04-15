@@ -20,7 +20,7 @@ public class InsertionSortTest {
     @Test
     void alreadySorted() {
         List<Integer> list = Stream.of(1, 2, 3, 4, 5).collect(Collectors.toList());
-        List<SortFrame> actual = new InsertionSorter().setList(list).generateSortFrames();
+        List<SortFrame> actual = new InsertionSorter().generateSortFrames(list);
 
         List<SortFrame> expected = new ArrayList<>();
         expected.add(new SortFrame(new ArrayList<>(List.of(1, 2, 3, 4, 5)), 0));
@@ -36,7 +36,7 @@ public class InsertionSortTest {
     @Test
     void reverseSorted() {
         List<Integer> list = Stream.of(5, 4, 3, 2, 1).collect(Collectors.toList());
-        List<SortFrame> actual = new InsertionSorter().setList(list).generateSortFrames();
+        List<SortFrame> actual = new InsertionSorter().generateSortFrames(list);
 
         List<SortFrame> expected = new ArrayList<>();
         expected.add(new SortFrame(new ArrayList<>(List.of(5, 4, 3, 2, 1)), 0));
@@ -62,7 +62,7 @@ public class InsertionSortTest {
     @Test
     void allSameValue() {
         List<Integer> list = Stream.of(1, 1, 1, 1, 1, 1, 1).collect(Collectors.toList());
-        List<SortFrame> actual = new InsertionSorter().setList(list).generateSortFrames();
+        List<SortFrame> actual = new InsertionSorter().generateSortFrames(list);
 
         List<SortFrame> expected = new ArrayList<>();
         expected.add(new SortFrame(new ArrayList<>(List.of(1, 1, 1, 1, 1, 1, 1)), 0));
@@ -80,7 +80,7 @@ public class InsertionSortTest {
     @Test
     void emptyList() {
         List<Integer> list = new ArrayList<>();
-        List<SortFrame> actual = new InsertionSorter().setList(list).generateSortFrames();
+        List<SortFrame> actual = new InsertionSorter().generateSortFrames(list);
 
         List<SortFrame> expected = new ArrayList<>();
 
@@ -96,13 +96,13 @@ public class InsertionSortTest {
         list.add(2);
         list.add(1);
         list.add(null);
-        List<SortFrame> actual = new InsertionSorter().setList(list).generateSortFrames();
+        List<SortFrame> actual = new InsertionSorter().generateSortFrames(list);
     }
 
     @Disabled
     @Test
     void nullList() {
         List<Integer> list = null;
-        List<SortFrame> actual = new InsertionSorter().setList(list).generateSortFrames();
+        List<SortFrame> actual = new InsertionSorter().generateSortFrames(list);
     }
 }

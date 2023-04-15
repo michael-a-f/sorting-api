@@ -6,9 +6,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class BubbleSorter extends Sorter {
+public class BubbleSorter implements Sorter {
 
-    public List<SortFrame> generateSortFrames() {
+    public List<SortFrame> generateSortFrames(List<Integer> list) {
+        List<SortFrame> frames = new ArrayList<>();
         if (list.size() == 0) {
             return frames;
         }
@@ -30,6 +31,6 @@ public class BubbleSorter extends Sorter {
             }
         }
         frames.add(new SortFrame(new ArrayList<>(list), null));
-        return this.frames;
+        return frames;
     }
 }
