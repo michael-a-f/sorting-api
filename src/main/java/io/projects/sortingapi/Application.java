@@ -2,6 +2,7 @@ package io.projects.sortingapi;
 
 import io.projects.sortingapi.sorting.SortFrame;
 import io.projects.sortingapi.sorting.SorterFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.*;
@@ -16,12 +17,14 @@ public class Application {
 		SpringApplication.run(Application.class, args);
 	}
 
+	@Autowired
+	SorterFactory sorterFactory;
 
 	@PostMapping("/sort")
 	@CrossOrigin()
 	public @ResponseBody List<SortFrame> sort(@RequestParam String algorithm,
 											  @RequestBody List<Integer> list) throws Exception {
-		return new SorterFactory().getSorter(algorithm).generateSortFrames(list);
+		return sorterFactory.getSorter(algorithm).generateSortFrames(list);
 	}
 
 
