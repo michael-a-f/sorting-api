@@ -17,8 +17,11 @@ public class Application {
 		SpringApplication.run(Application.class, args);
 	}
 
-	@Autowired
-	SorterFactory sorterFactory;
+	private final SorterFactory sorterFactory;
+
+	public Application(SorterFactory sorterFactory) {
+		this.sorterFactory = sorterFactory;
+	}
 
 	@PostMapping("/sort")
 	@CrossOrigin()
