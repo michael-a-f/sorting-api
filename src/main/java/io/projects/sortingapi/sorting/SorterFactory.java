@@ -23,7 +23,6 @@ public class SorterFactory {
 
     public Sorter getSorter(String algorithm) throws Exception {
         if (algorithm.equalsIgnoreCase("insertion")) {
-            System.out.println(insertionSorter.toString());
             return insertionSorter;
         } else if (algorithm.equalsIgnoreCase("bubble")) {
             return bubbleSorter;

@@ -13,4 +13,5 @@ public class QuickSorter implements Sorter {
 
     public List<SortFrame> generateSortFrames(List<Integer> list) {
         return null;
-    }}
+    }
+}
