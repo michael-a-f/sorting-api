@@ -21,16 +21,12 @@ public class SorterFactory {
         this.quickSorter = quickSorter;
     }
 
-    public Sorter getSorter(String algorithm) throws Exception {
-        if (algorithm.equalsIgnoreCase("insertion")) {
-            return insertionSorter;
-        } else if (algorithm.equalsIgnoreCase("bubble")) {
-            return bubbleSorter;
-        } else if (algorithm.equalsIgnoreCase("merge")) {
-            return mergeSorter;
-        } else if (algorithm.equalsIgnoreCase("quick")) {
-            return quickSorter;
-        }
-        throw new IllegalArgumentException(algorithm + " is not a supported algorithm!");
+    public Sorter getSorter(String algorithm) {
+        return switch (SortingAlgorithm.valueOf(algorithm.toUpperCase())) {
+            case BUBBLE -> bubbleSorter;
+            case INSERTION -> insertionSorter;
+            case QUICK -> quickSorter;
+            case MERGE -> mergeSorter;
+        };
     }
 }
