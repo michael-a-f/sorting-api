@@ -13,20 +13,27 @@ import java.util.List;
 @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
 public class InsertionSorter implements Sorter {
 
+    public static class InsertionSortFrame extends SortFrame {
+        public InsertionSortFrame(List<Integer> list, int currentIdx) {
+            super(List.copyOf(list));
+            this.highlights.put("current", currentIdx);
+        }
+    }
+
     public List<SortFrame> generateSortFrames(List<Integer> list) {
         List<SortFrame> frames = new ArrayList<>();
         int n = list.size();
         if (n == 0) {
             return frames;
         }
-        frames.add(new SortFrame(new ArrayList<>(list)).setCurrent(0));
+        frames.add(new InsertionSortFrame(list, 0));
         for (int currIdx = 1; currIdx < n; currIdx++) {
-            frames.add(new SortFrame(List.copyOf(list)).setCurrent(currIdx));
+            frames.add(new InsertionSortFrame(list, currIdx));
             int right = currIdx;
             int left = right - 1;
             while ((left > -1) && (list.get(right) < list.get(left))) {
                 Collections.swap(list, left, right);
-                frames.add(new SortFrame(List.copyOf(list)).setCurrent(left));
+                frames.add(new InsertionSortFrame(list, left));
                 left--;
                 right--;
             }

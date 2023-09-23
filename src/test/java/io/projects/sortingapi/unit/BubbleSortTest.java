@@ -1,6 +1,8 @@
 package io.projects.sortingapi.unit;
 
 import io.projects.sortingapi.sorting.SortFrame;
+import io.projects.sortingapi.sorting.sorters.BubbleSorter;
+import io.projects.sortingapi.sorting.sorters.BubbleSorter.BubbleSortFrame;
 import io.projects.sortingapi.sorting.sorters.Sorter;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -27,18 +29,18 @@ public class BubbleSortTest {
         List<SortFrame> actual = bubbleSorter.generateSortFrames(list);
         List<SortFrame> expected = new ArrayList<>();
 
-        expected.add(new SortFrame(List.of(1, 2, 5, 4, 3)).setCurrent(0));
-        expected.add(new SortFrame(List.of(1, 2, 5, 4, 3)).setCurrent(1));
-        expected.add(new SortFrame(List.of(1, 2, 5, 4, 3)).setCurrent(2));
-        expected.add(new SortFrame(List.of(1, 2, 4, 5, 3)).setCurrent(3));
-        expected.add(new SortFrame(List.of(1, 2, 4, 3, 5)).setCurrent(4));
-        expected.add(new SortFrame(List.of(1, 2, 4, 3, 5)).setCurrent(0));
-        expected.add(new SortFrame(List.of(1, 2, 4, 3, 5)).setCurrent(1));
-        expected.add(new SortFrame(List.of(1, 2, 4, 3, 5)).setCurrent(2));
-        expected.add(new SortFrame(List.of(1, 2, 3, 4, 5)).setCurrent(3));
-        expected.add(new SortFrame(List.of(1, 2, 3, 4, 5)).setCurrent(0));
-        expected.add(new SortFrame(List.of(1, 2, 3, 4, 5)).setCurrent(1));
-        expected.add(new SortFrame(List.of(1, 2, 3, 4, 5)).setCurrent(2));
+        expected.add(new BubbleSortFrame(List.of(1, 2, 5, 4, 3), 0));
+        expected.add(new BubbleSortFrame(List.of(1, 2, 5, 4, 3), 1));
+        expected.add(new BubbleSortFrame(List.of(1, 2, 5, 4, 3), 2));
+        expected.add(new BubbleSortFrame(List.of(1, 2, 4, 5, 3), 3));
+        expected.add(new BubbleSortFrame(List.of(1, 2, 4, 3, 5), 4));
+        expected.add(new BubbleSortFrame(List.of(1, 2, 4, 3, 5), 0));
+        expected.add(new BubbleSortFrame(List.of(1, 2, 4, 3, 5), 1));
+        expected.add(new BubbleSortFrame(List.of(1, 2, 4, 3, 5), 2));
+        expected.add(new BubbleSortFrame(List.of(1, 2, 3, 4, 5), 3));
+        expected.add(new BubbleSortFrame(List.of(1, 2, 3, 4, 5), 0));
+        expected.add(new BubbleSortFrame(List.of(1, 2, 3, 4, 5), 1));
+        expected.add(new BubbleSortFrame(List.of(1, 2, 3, 4, 5), 2));
 
         assertFramesMatch(expected, actual);
     }
@@ -49,11 +51,11 @@ public class BubbleSortTest {
         List<SortFrame> actual = bubbleSorter.generateSortFrames(list);
 
         List<SortFrame> expected = new ArrayList<>();
-        expected.add(new SortFrame(List.of(1, 2, 3, 4, 5)).setCurrent(0));
-        expected.add(new SortFrame(List.of(1, 2, 3, 4, 5)).setCurrent(1));
-        expected.add(new SortFrame(List.of(1, 2, 3, 4, 5)).setCurrent(2));
-        expected.add(new SortFrame(List.of(1, 2, 3, 4, 5)).setCurrent(3));
-        expected.add(new SortFrame(List.of(1, 2, 3, 4, 5)).setCurrent(4));
+        expected.add(new BubbleSortFrame(List.of(1, 2, 3, 4, 5), 0));
+        expected.add(new BubbleSortFrame(List.of(1, 2, 3, 4, 5), 1));
+        expected.add(new BubbleSortFrame(List.of(1, 2, 3, 4, 5), 2));
+        expected.add(new BubbleSortFrame(List.of(1, 2, 3, 4, 5), 3));
+        expected.add(new BubbleSortFrame(List.of(1, 2, 3, 4, 5), 4));
 
         assertFramesMatch(expected, actual);
     }
@@ -64,21 +66,21 @@ public class BubbleSortTest {
         List<SortFrame> actual = bubbleSorter.generateSortFrames(list);
 
         List<SortFrame> expected = new ArrayList<>();
-        expected.add(new SortFrame(List.of(5, 4, 3, 2, 1)).setCurrent(0));
-        expected.add(new SortFrame(List.of(4, 5, 3, 2, 1)).setCurrent(1));
-        expected.add(new SortFrame(List.of(4, 3, 5, 2, 1)).setCurrent(2));
-        expected.add(new SortFrame(List.of(4, 3, 2, 5, 1)).setCurrent(3));
-        expected.add(new SortFrame(List.of(4, 3, 2, 1, 5)).setCurrent(4));
-        expected.add(new SortFrame(List.of(4, 3, 2, 1, 5)).setCurrent(0));
-        expected.add(new SortFrame(List.of(3, 4, 2, 1, 5)).setCurrent(1));
-        expected.add(new SortFrame(List.of(3, 2, 4, 1, 5)).setCurrent(2));
-        expected.add(new SortFrame(List.of(3, 2, 1, 4, 5)).setCurrent(3));
-        expected.add(new SortFrame(List.of(3, 2, 1, 4, 5)).setCurrent(0));
-        expected.add(new SortFrame(List.of(2, 3, 1, 4, 5)).setCurrent(1));
-        expected.add(new SortFrame(List.of(2, 1, 3, 4, 5)).setCurrent(2));
-        expected.add(new SortFrame(List.of(2, 1, 3, 4, 5)).setCurrent(0));
-        expected.add(new SortFrame(List.of(1, 2, 3, 4, 5)).setCurrent(1));
-        expected.add(new SortFrame(List.of(1, 2, 3, 4, 5)).setCurrent(0));
+        expected.add(new BubbleSortFrame(List.of(5, 4, 3, 2, 1), 0));
+        expected.add(new BubbleSortFrame(List.of(4, 5, 3, 2, 1), 1));
+        expected.add(new BubbleSortFrame(List.of(4, 3, 5, 2, 1), 2));
+        expected.add(new BubbleSortFrame(List.of(4, 3, 2, 5, 1), 3));
+        expected.add(new BubbleSortFrame(List.of(4, 3, 2, 1, 5), 4));
+        expected.add(new BubbleSortFrame(List.of(4, 3, 2, 1, 5), 0));
+        expected.add(new BubbleSortFrame(List.of(3, 4, 2, 1, 5), 1));
+        expected.add(new BubbleSortFrame(List.of(3, 2, 4, 1, 5), 2));
+        expected.add(new BubbleSortFrame(List.of(3, 2, 1, 4, 5), 3));
+        expected.add(new BubbleSortFrame(List.of(3, 2, 1, 4, 5), 0));
+        expected.add(new BubbleSortFrame(List.of(2, 3, 1, 4, 5), 1));
+        expected.add(new BubbleSortFrame(List.of(2, 1, 3, 4, 5), 2));
+        expected.add(new BubbleSortFrame(List.of(2, 1, 3, 4, 5), 0));
+        expected.add(new BubbleSortFrame(List.of(1, 2, 3, 4, 5), 1));
+        expected.add(new BubbleSortFrame(List.of(1, 2, 3, 4, 5), 0));
 
         assertFramesMatch(expected, actual);
     }
@@ -89,13 +91,13 @@ public class BubbleSortTest {
         List<SortFrame> actual = bubbleSorter.generateSortFrames(list);
 
         List<SortFrame> expected = new ArrayList<>();
-        expected.add(new SortFrame(List.of(1, 1, 1, 1, 1, 1, 1)).setCurrent(0));
-        expected.add(new SortFrame(List.of(1, 1, 1, 1, 1, 1, 1)).setCurrent(1));
-        expected.add(new SortFrame(List.of(1, 1, 1, 1, 1, 1, 1)).setCurrent(2));
-        expected.add(new SortFrame(List.of(1, 1, 1, 1, 1, 1, 1)).setCurrent(3));
-        expected.add(new SortFrame(List.of(1, 1, 1, 1, 1, 1, 1)).setCurrent(4));
-        expected.add(new SortFrame(List.of(1, 1, 1, 1, 1, 1, 1)).setCurrent(5));
-        expected.add(new SortFrame(List.of(1, 1, 1, 1, 1, 1, 1)).setCurrent(6));
+        expected.add(new BubbleSortFrame(List.of(1, 1, 1, 1, 1, 1, 1), 0));
+        expected.add(new BubbleSortFrame(List.of(1, 1, 1, 1, 1, 1, 1), 1));
+        expected.add(new BubbleSortFrame(List.of(1, 1, 1, 1, 1, 1, 1), 2));
+        expected.add(new BubbleSortFrame(List.of(1, 1, 1, 1, 1, 1, 1), 3));
+        expected.add(new BubbleSortFrame(List.of(1, 1, 1, 1, 1, 1, 1), 4));
+        expected.add(new BubbleSortFrame(List.of(1, 1, 1, 1, 1, 1, 1), 5));
+        expected.add(new BubbleSortFrame(List.of(1, 1, 1, 1, 1, 1, 1), 6));
 
         assertFramesMatch(expected, actual);
     }

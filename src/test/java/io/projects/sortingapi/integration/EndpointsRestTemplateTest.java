@@ -2,6 +2,8 @@ package io.projects.sortingapi.integration;
 
 import io.projects.sortingapi.TestUtils;
 import io.projects.sortingapi.sorting.SortFrame;
+import io.projects.sortingapi.sorting.sorters.BubbleSorter;
+import io.projects.sortingapi.sorting.sorters.BubbleSorter.BubbleSortFrame;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -34,23 +36,23 @@ public class EndpointsRestTemplateTest {
     private TestRestTemplate restTemplate;
 
     @Test
-    public void testInsertionSortResponse() throws Exception {
+    public void testBubbleSortResponse() throws Exception {
         String url = "http://localhost:" + port + "/sort?algorithm=bubble";
         List<Integer> list = new ArrayList<>(List.of(1, 2, 5, 4, 3));
 
         List<SortFrame> expected = new ArrayList<>();
-        expected.add(new SortFrame(List.of(1, 2, 5, 4, 3)).setCurrent(0));
-        expected.add(new SortFrame(List.of(1, 2, 5, 4, 3)).setCurrent(1));
-        expected.add(new SortFrame(List.of(1, 2, 5, 4, 3)).setCurrent(2));
-        expected.add(new SortFrame(List.of(1, 2, 4, 5, 3)).setCurrent(3));
-        expected.add(new SortFrame(List.of(1, 2, 4, 3, 5)).setCurrent(4));
-        expected.add(new SortFrame(List.of(1, 2, 4, 3, 5)).setCurrent(0));
-        expected.add(new SortFrame(List.of(1, 2, 4, 3, 5)).setCurrent(1));
-        expected.add(new SortFrame(List.of(1, 2, 4, 3, 5)).setCurrent(2));
-        expected.add(new SortFrame(List.of(1, 2, 3, 4, 5)).setCurrent(3));
-        expected.add(new SortFrame(List.of(1, 2, 3, 4, 5)).setCurrent(0));
-        expected.add(new SortFrame(List.of(1, 2, 3, 4, 5)).setCurrent(1));
-        expected.add(new SortFrame(List.of(1, 2, 3, 4, 5)).setCurrent(2));
+        expected.add(new BubbleSortFrame(List.of(1, 2, 5, 4, 3), 0));
+        expected.add(new BubbleSortFrame(List.of(1, 2, 5, 4, 3), 1));
+        expected.add(new BubbleSortFrame(List.of(1, 2, 5, 4, 3), 2));
+        expected.add(new BubbleSortFrame(List.of(1, 2, 4, 5, 3), 3));
+        expected.add(new BubbleSortFrame(List.of(1, 2, 4, 3, 5), 4));
+        expected.add(new BubbleSortFrame(List.of(1, 2, 4, 3, 5), 0));
+        expected.add(new BubbleSortFrame(List.of(1, 2, 4, 3, 5), 1));
+        expected.add(new BubbleSortFrame(List.of(1, 2, 4, 3, 5), 2));
+        expected.add(new BubbleSortFrame(List.of(1, 2, 3, 4, 5), 3));
+        expected.add(new BubbleSortFrame(List.of(1, 2, 3, 4, 5), 0));
+        expected.add(new BubbleSortFrame(List.of(1, 2, 3, 4, 5), 1));
+        expected.add(new BubbleSortFrame(List.of(1, 2, 3, 4, 5), 2));
 
         HttpEntity<List<Integer>> request = new HttpEntity<>(list);
         ParameterizedTypeReference<List<SortFrame>> ptr = new ParameterizedTypeReference<>() {};
