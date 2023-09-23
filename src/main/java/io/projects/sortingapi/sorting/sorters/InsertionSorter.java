@@ -19,19 +19,18 @@ public class InsertionSorter implements Sorter {
         if (n == 0) {
             return frames;
         }
-        frames.add(new SortFrame(new ArrayList<>(list), 0));
+        frames.add(new SortFrame(new ArrayList<>(list)).setCurrent(0));
         for (int currIdx = 1; currIdx < n; currIdx++) {
-            frames.add(new SortFrame(new ArrayList<>(list), currIdx));
+            frames.add(new SortFrame(List.copyOf(list)).setCurrent(currIdx));
             int right = currIdx;
             int left = right - 1;
             while ((left > -1) && (list.get(right) < list.get(left))) {
                 Collections.swap(list, left, right);
-                frames.add(new SortFrame(new ArrayList<>(list), left));
+                frames.add(new SortFrame(List.copyOf(list)).setCurrent(left));
                 left--;
                 right--;
             }
         }
-        frames.add(new SortFrame(new ArrayList<>(list), null));
         return frames;
     }
 }

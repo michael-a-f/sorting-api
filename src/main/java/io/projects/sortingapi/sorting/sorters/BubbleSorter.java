@@ -23,19 +23,18 @@ public class BubbleSorter implements Sorter {
         while (!isSorted) {
             int swaps = 0;
             for (int i = 0; i < right; i++) {
-                frames.add(new SortFrame(new ArrayList<>(list), i));
+                frames.add(new SortFrame(List.copyOf(list)).setCurrent(i));
                 if (list.get(i) > list.get(i + 1)) {
                     Collections.swap(list, i, i+1);
                     swaps++;
                 }
             }
-            frames.add(new SortFrame(new ArrayList<>(list), right));
+            frames.add(new SortFrame(List.copyOf(list)).setCurrent(right));
             right--;
             if (swaps == 0) {
                 isSorted = true;
             }
         }
-        frames.add(new SortFrame(new ArrayList<>(list), null));
         return frames;
     }
 }
