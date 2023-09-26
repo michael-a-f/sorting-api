@@ -1,0 +1,9 @@
+To see the difference that compression makes for these responses...
+
+1. curl endpoint with 75 element list without compression
+- curl -X POST -H "Content-Type: application/json" -d @src/main/resources/request.json 'localhost:8080/sort?algorithm=quick' -w '%{size_download}'
+- Result: 237,211 bytes or 237.21 kb downloaded
+
+2. curl endpoint with 75 element list with compression
+- curl -X POST --compressed -H "Content-Type: application/json" -d @src/main/resources/request.json 'localhost:8080/sort?algorithm=quick' -w '%{size_download}'
+- Result: 5013 bytes or 5.01 kb downloaded-- a 97.89% reduction!
