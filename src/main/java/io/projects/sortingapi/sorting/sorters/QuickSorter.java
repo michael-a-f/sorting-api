@@ -8,12 +8,26 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 @Component
 @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
 public class QuickSorter implements Sorter {
+
+    public static class QuickSortFrame extends SortFrame {
+        public QuickSortFrame(List<Integer> list, int pivot, int j, int i) {
+            super(List.copyOf(list));
+            this.highlights.put("pivot", pivot);
+            this.highlights.put("i", i);
+            this.highlights.put("j", j);
+        }
+
+        public QuickSortFrame(List<Integer> list, int pivot, int i) {
+            super(List.copyOf(list));
+            this.highlights.put("pivot", pivot);
+            this.highlights.put("i", i);
+        }
+    }
 
     public List<SortFrame> generateSortFrames(List<Integer> list) {
         final List<SortFrame> frames = new ArrayList<>();
@@ -33,25 +47,25 @@ public class QuickSorter implements Sorter {
         int valAtPivot = list.get(right);
         int i = (left - 1);
         for (int j = left; j < right; j++) {
-            frames.add(new SortFrame(new ArrayList<>(list), Map.of("pivot", right, "j", j, "i", i)));
+            frames.add(new QuickSortFrame(list, right, j, i));
             if (list.get(j) <= valAtPivot) {
                 i++;
-                frames.add(new SortFrame(new ArrayList<>(list), Map.of("pivot", right, "j", j, "i", i)));
+                frames.add(new QuickSortFrame(list, right, j, i));
                 if (!Objects.equals(list.get(i), list.get(j))) {
                     int tmp = list.get(i);
                     list.set(i, list.get(j));
                     list.set(j, tmp);
-                    frames.add(new SortFrame(new ArrayList<>(list), Map.of("pivot", right, "j", j, "i", i)));
+                    frames.add(new QuickSortFrame(list, right, j, i));
                 }
             }
         }
 
-        frames.add(new SortFrame(new ArrayList<>(list), Map.of("pivot", right, "i", i + 1)));
+        frames.add(new QuickSortFrame(list, right, i+1));
         if (!Objects.equals(list.get(i+1), list.get(right))) {
             int tmp = list.get(i + 1);
             list.set(i + 1, list.get(right));
             list.set(right, tmp);
-            frames.add(new SortFrame(new ArrayList<>(list), Map.of("pivot", i + 1, "i", right)));
+            frames.add(new QuickSortFrame(list, i+1, right));
         }
 
         return i + 1;

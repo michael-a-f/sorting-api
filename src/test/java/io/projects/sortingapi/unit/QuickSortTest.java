@@ -1,6 +1,8 @@
 package io.projects.sortingapi.unit;
 
 import io.projects.sortingapi.sorting.SortFrame;
+import io.projects.sortingapi.sorting.sorters.QuickSorter;
+import io.projects.sortingapi.sorting.sorters.QuickSorter.QuickSortFrame;
 import io.projects.sortingapi.sorting.sorters.Sorter;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,22 +38,22 @@ public class QuickSortTest {
         final List<SortFrame> actual = quickSorter.generateSortFrames(list);
 
         final List<SortFrame> expected = new ArrayList<>();
-        expected.add(new SortFrame(new ArrayList<>(List.of(4, 5, 3, 1, 2)), Map.of("i", -1, "pivot", 4, "j", 0)));
-        expected.add(new SortFrame(new ArrayList<>(List.of(4, 5, 3, 1, 2)), Map.of("i", -1, "pivot", 4, "j", 1)));
-        expected.add(new SortFrame(new ArrayList<>(List.of(4, 5, 3, 1, 2)), Map.of("i", -1, "pivot", 4, "j", 2)));
-        expected.add(new SortFrame(new ArrayList<>(List.of(4, 5, 3, 1, 2)), Map.of("i", -1, "pivot", 4, "j", 3)));
-        expected.add(new SortFrame(new ArrayList<>(List.of(4, 5, 3, 1, 2)), Map.of("i", 0, "pivot", 4, "j", 3)));
-        expected.add(new SortFrame(new ArrayList<>(List.of(1, 5, 3, 4, 2)), Map.of("i", 0, "pivot", 4, "j", 3)));
-        expected.add(new SortFrame(new ArrayList<>(List.of(1, 5, 3, 4, 2)), Map.of("i", 1, "pivot", 4)));
-        expected.add(new SortFrame(new ArrayList<>(List.of(1, 2, 3, 4, 5)), Map.of("i", 4, "pivot", 1)));
-        expected.add(new SortFrame(new ArrayList<>(List.of(1, 2, 3, 4, 5)), Map.of("i", 1, "pivot", 4, "j", 2)));
-        expected.add(new SortFrame(new ArrayList<>(List.of(1, 2, 3, 4, 5)), Map.of("i", 2, "pivot", 4, "j", 2)));
-        expected.add(new SortFrame(new ArrayList<>(List.of(1, 2, 3, 4, 5)), Map.of("i", 2, "pivot", 4, "j", 3)));
-        expected.add(new SortFrame(new ArrayList<>(List.of(1, 2, 3, 4, 5)), Map.of("i", 3, "pivot", 4, "j", 3)));
-        expected.add(new SortFrame(new ArrayList<>(List.of(1, 2, 3, 4, 5)), Map.of("i", 4, "pivot", 4)));
-        expected.add(new SortFrame(new ArrayList<>(List.of(1, 2, 3, 4, 5)), Map.of("i", 1, "pivot", 3, "j", 2)));
-        expected.add(new SortFrame(new ArrayList<>(List.of(1, 2, 3, 4, 5)), Map.of("i", 2, "pivot", 3, "j", 2)));
-        expected.add(new SortFrame(new ArrayList<>(List.of(1, 2, 3, 4, 5)), Map.of("i", 3, "pivot", 3)));
+        expected.add(new QuickSortFrame(List.of(4, 5, 3, 1, 2), 4, 0, -1));
+        expected.add(new QuickSortFrame(List.of(4, 5, 3, 1, 2), 4, 1, -1));
+        expected.add(new QuickSortFrame(List.of(4, 5, 3, 1, 2), 4, 2, -1));
+        expected.add(new QuickSortFrame(List.of(4, 5, 3, 1, 2), 4, 3, -1));
+        expected.add(new QuickSortFrame(List.of(4, 5, 3, 1, 2), 4, 3, 0));
+        expected.add(new QuickSortFrame(List.of(1, 5, 3, 4, 2), 4, 3, 0));
+        expected.add(new QuickSortFrame(List.of(1, 5, 3, 4, 2), 4, 1));
+        expected.add(new QuickSortFrame(List.of(1, 2, 3, 4, 5), 1, 4));
+        expected.add(new QuickSortFrame(List.of(1, 2, 3, 4, 5), 4, 2, 1));
+        expected.add(new QuickSortFrame(List.of(1, 2, 3, 4, 5),4, 2, 2));
+        expected.add(new QuickSortFrame(List.of(1, 2, 3, 4, 5), 4, 3, 2));
+        expected.add(new QuickSortFrame(List.of(1, 2, 3, 4, 5), 4, 3, 3));
+        expected.add(new QuickSortFrame(List.of(1, 2, 3, 4, 5), 4, 4));
+        expected.add(new QuickSortFrame(List.of(1, 2, 3, 4, 5), 3, 2, 1));
+        expected.add(new QuickSortFrame(List.of(1, 2, 3, 4, 5), 3, 2, 2));
+        expected.add(new QuickSortFrame(List.of(1, 2, 3, 4, 5), 3, 3));
 
         assertFramesMatch(expected, actual);
     }
