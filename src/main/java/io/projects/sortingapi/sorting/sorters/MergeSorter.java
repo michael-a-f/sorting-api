@@ -13,10 +13,10 @@ import java.util.List;
 public class MergeSorter implements Sorter {
 
     public static class MergeSortFrame extends SortFrame {
-        public MergeSortFrame(List<Integer> list, int left, int current, int right) {
+        public MergeSortFrame(List<Integer> list, int left, int right) {
             super(List.copyOf(list));
             this.highlights.put("left", left);
-            this.highlights.put("current", current);
+            //this.highlights.put("current", current);
             this.highlights.put("right", right);
         }
     }
@@ -29,6 +29,7 @@ public class MergeSorter implements Sorter {
 
     public void mergeSort(List<Integer> list, int leftIndex, int rightIndex, List<SortFrame> frames) {
         if (leftIndex < rightIndex) {
+            frames.add(new MergeSortFrame(list, leftIndex, rightIndex));
             final int midIndex = (leftIndex + rightIndex) / 2;
             mergeSort(list, leftIndex, midIndex, frames);
             mergeSort(list, midIndex + 1, rightIndex, frames);
@@ -44,15 +45,18 @@ public class MergeSorter implements Sorter {
         while (rightMin <= rightIndex2 && leftMin <= rightMin) {
             int leftVal = list.get(leftMin);
             int rightVal = list.get(rightMin);
+            frames.add(new MergeSortFrame(list, leftMin, rightMin));
             if (rightVal < leftVal) {
                 int toFront = list.remove(rightMin);
                 list.add(leftMin, toFront);
+                frames.add(new MergeSortFrame(list, leftMin, rightMin));
                 // left is now sorted, and right was shifted
                 leftMin++;
                 rightMin++;
             } else {
                 leftMin++;
             }
+            frames.add(new MergeSortFrame(list, leftMin, rightMin));
         }
     }
 }
