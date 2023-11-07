@@ -18,14 +18,14 @@ public class QuickSorter implements Sorter {
         public QuickSortFrame(List<Integer> list, int pivot, int j, int i) {
             super(List.copyOf(list));
             this.highlights.put("pivot", pivot);
-            this.highlights.put("i", i);
-            this.highlights.put("j", j);
+            this.highlights.put("left", i);
+            this.highlights.put("right", j);
         }
 
         public QuickSortFrame(List<Integer> list, int pivot, int i) {
             super(List.copyOf(list));
             this.highlights.put("pivot", pivot);
-            this.highlights.put("i", i);
+            this.highlights.put("left", i);
         }
     }
 
